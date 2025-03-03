@@ -1,6 +1,11 @@
+
+<header>
+    <link rel="stylesheet" href="style.css">
+</header>
+
 <?php
-include_once 'header.php';
 session_start();
+include_once 'header.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']); 
@@ -19,29 +24,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
+<div class="container">
+    <h1>Cafeteria</h1>
+    <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
 
-<h1>Cafeteria</h1>
-<?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?
+    <form action="login.php" method="post">
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+         <br>
 
-<form action="login.php" method="post">
-    <label for="email">Email:</label>
-    <input type="email" name="email" required><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+         <br>
+        <button type="submit">Login</button>
+    </form>
+       <br>
+    <a href="forgot_password.php">Forgot Password?</a>
+</div>
 
-    <label for="password">Password:</label>
-    <input type="password" name="password" required><br>
-
-    <button type="submit">Login</button>
-</form>
-<a href="forgot_password.php">Forgot Password?</a>
-</body>
-</html>
-
-include_once 'footer.php';
- ?>
-
+<?php include_once 'footer.php'; ?>
