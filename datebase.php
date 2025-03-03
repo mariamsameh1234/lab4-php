@@ -54,4 +54,3 @@ function delete($pdo, $table, $condition, $params = []) {
     return $stmt->execute($params);
 }
 ?>
-
