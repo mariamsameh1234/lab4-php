@@ -1,38 +1,56 @@
 <?php
 session_start();
-include 'config.php'; 
-include 'datebase.php';
+include 'config.php';
+include 'database.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
+    $password = trim($_POST['password']);
+    $confirm_password = trim($_POST['confirm_password']);
     $room_id = $_POST['room_id'];
     $ext = trim($_POST['ext']);
 
-  
+    
     if (empty($name) || empty($email) || empty($password) || empty($confirm_password) || empty($room_id)) {
-        die("Please fill all required fields.");
+        $response = ["status" => "error", "message" => " All fields are required!"];
+        echo json_encode($response);
+        exit();
     }
 
- 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $response = ["status" => "error", "message" => " Invalid email format!"];
+        echo json_encode($response);
+        exit();
+    }
+
     if ($password !== $confirm_password) {
-        die("Passwords do not match.");
+        $response = ["status" => "error", "message" => " Password and confirmation do not match!"];
+        echo json_encode($response);
+        exit();
     }
 
-   
+    
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    if ($stmt->fetchColumn() > 0) {
+        $response = ["status" => "error", "message" => " Email is already in use!"];
+        echo json_encode($response);
+        exit();
+    }
+
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $stmt = $pdo->prepare("INSERT INTO users (name, email, password, room_id, ext) VALUES (?, ?, ?, ?, ?)");
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO users (name, email, password, room_id, ext) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$name, $email, $hashed_password, $room_id, $ext]);
-
-        header("Location: display_users.php"); 
-        exit();
+        $response = ["status" => "success", "message" => "User added successfully!"];
     } catch (PDOException $e) {
-        die("Error inserting user: " . $e->getMessage());
+        $response = ["status" => "error", "message" => " Error inserting data: " . $e->getMessage()];
     }
+
+    echo json_encode($response);
 }
 ?>
+
 
