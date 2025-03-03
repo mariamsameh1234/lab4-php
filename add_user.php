@@ -1,7 +1,6 @@
 <header>
     <link rel="stylesheet" href="style.css">
 </header>
-
 <?php
 session_start();
 
@@ -12,7 +11,8 @@ if (!isset($_SESSION['email'])) {
 
 include 'header.php';
 include 'config.php';
-include 'datesbase.php';
+include 'datebase.php';
+
 
 $stmt = $pdo->query("SELECT id, name FROM rooms");
 $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -21,7 +21,14 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="container">
     <h2>Add User</h2>
 
-    <form action="validation.php" method="POST" enctype="multipart/form-data" target="hidden_iframe">
+   
+    <?php if (isset($_GET['success'])) : ?>
+        <p style="color:green;"><?= htmlspecialchars($_GET['success']) ?></p>
+    <?php elseif (isset($_GET['error'])) : ?>
+        <p style="color:red;"><?= htmlspecialchars($_GET['error']) ?></p>
+    <?php endif; ?>
+
+    <form action="validation.php" method="POST" enctype="multipart/form-data">
         <input type="text" name="name" required placeholder="Name">
         <input type="email" name="email" required placeholder="Email">
         <input type="password" name="password" required placeholder="Password">
@@ -41,8 +48,6 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <button type="reset">Reset</button>
         <button type="button" onclick="window.location.href='display_users.php'">Display All Users</button>
     </form>
-
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
 </div>
 
 <?php include 'footer.php'; ?>
