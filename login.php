@@ -27,9 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
 <h1>Cafeteria</h1>
-
-<?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
-
+<?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?
 
 <form action="login.php" method="post">
     <label for="email">Email:</label>
@@ -40,9 +38,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <button type="submit">Login</button>
 </form>
-
 <a href="forgot_password.php">Forgot Password?</a>
-
 </body>
 </html>
+
+include_once 'footer.php';
+ ?>
 
