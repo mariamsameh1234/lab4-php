@@ -1,4 +1,5 @@
 <?php
+include_once 'header.php';
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
