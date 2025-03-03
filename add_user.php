@@ -51,5 +51,3 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <?php include 'footer.php'; ?>
-
-
