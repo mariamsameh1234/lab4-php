@@ -18,15 +18,28 @@ function get_all_users($pdo) {
 function get_user($pdo, $id) {
     $columns = ["name", "email", "ext", "room_id", "profile_picture"];
     $condition = "id = ?";
-    return select($pdo, "users", $columns, $condition, [$id]);  // تعديل من "user" إلى "users"
+    return select($pdo, "users", $columns, $condition, [$id]);  
 }
+
 
 function update_user($pdo, $id, $name, $email, $room_id, $ext) {
-    return update($pdo, "users", ["name", "email", "room_id", "ext"], [$name, $email, $room_id, $ext], "id = ?");  // تعديل من "user" إلى "users"
-}
+    try {
+        $sql = "UPDATE users SET name = :name, email = :email, room_id = :room_id, ext = :ext WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        return $stmt->execute([
+            ':name' => $name,
+            ':email' => $email,
+            ':room_id' => $room_id,
+            ':ext' => $ext,
+            ':id' => $id
+        ]);
+    } catch (PDOException $e) {
+        die(" Error updating user: " . $e->getMessage());
+    }
+}     
 
 function delete_user($pdo, $id) {
-    return delete($pdo, "users", "id = ?", [$id]);  // تعديل من "user" إلى "users"
+    return delete($pdo, "users", "id = ?", [$id]); 
 }
 
 ?>
