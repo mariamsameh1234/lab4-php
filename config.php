@@ -24,6 +24,6 @@ define('DB_NAME', 'caffe');
 
 
 
-?>
+
 
 
