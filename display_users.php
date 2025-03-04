@@ -1,4 +1,5 @@
 
+
 <header>
     <link rel="stylesheet" href="style.css">
 </header>
@@ -49,7 +50,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
             </td>
             <td>
-                <a href="add_user.php?id=<?= $user['id'] ?>">Update</a>
+                 <a href="update_user.php?id=<?= $user['id'] ?>">Update</a>
                 | <a href="delete_user.php?id=<?= $user['id'] ?>" onclick="return confirm('Are you sure?')">Delete</a>
             </td>
         </tr>
