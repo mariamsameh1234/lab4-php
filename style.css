@@ -1,5 +1,5 @@
 
-  /* تنسيق الجسم */
+ 
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 
-/* التنقل Navbar */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -46,7 +46,7 @@ body {
     border-radius: 5px;
 }
 
-/* حاوية المحتوى (Container) */
+
 .container {
     display: flex;
     flex-direction: column;
@@ -55,13 +55,13 @@ body {
     height: 100vh;
 }
 
-/* تنسيق العناوين */
+
 h1, h2 {
     color: #343a40;
     margin-bottom: 20px;
 }
 
-/* تنسيق النموذج */
+
 form {
     background: white;
     padding: 20px;
@@ -89,7 +89,7 @@ input, select {
     font-size: 16px;
 }
 
-/* تنسيق الأزرار */
+
 button {
     background-color: #007bff;
     color: white;
@@ -106,7 +106,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* تنسيق الروابط */
+
 a {
     display: block;
     margin-top: 15px;
@@ -118,7 +118,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* حاوية داخلية */
+
 .container {
     width: 400px;
     background: white;
@@ -129,7 +129,7 @@ a:hover {
     margin: 50px auto;
 }
 
-/* تذييل الصفحة */
+
 .footer {
     text-align: center;
     background-color: #343a40;
@@ -140,7 +140,7 @@ a:hover {
     width: 100%;
 }
 
-/* تنسيق الجدول في صفحة "All Users" */
+
 table {
     width: 80%;
     margin: 20px auto;
